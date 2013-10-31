@@ -40,5 +40,6 @@ define openswan::connection(
     openswan::shared_secret { $name:
       hosts => "$leftid $rightid",
       psk   => decrypt($encryption_key, $encrypted_psk),
+    }
   }
 }
