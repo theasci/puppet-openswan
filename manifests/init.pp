@@ -22,4 +22,6 @@ class openswan (
   ~> class { 'openswan::service': }
   -> anchor { 'openswan::end': }
 
+  $connections = hiera_hash('openswan::connections', {})
+  create_resources('openswan::connection', $connections)
 }
