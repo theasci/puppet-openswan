@@ -24,6 +24,10 @@ class openswan::params {
       $package_list = ['libgmp3c2', 'openswan', 'lsof']
       $service_name = 'ipsec'
     }
-    default: { }
+    redhat,centos: {
+      $package_list = ['openswan']
+      $service_name = 'ipsec'
+    }
+    default: { fail('Unrecognized operating system') }
   }
 }
