@@ -19,7 +19,9 @@ define openswan::connection(
   $forceencaps       = undef,
   $auth              = undef,
   $type              = undef,
-  $opts              = undef
+  $opts              = undef,
+  $encrypted_psk     = undef,
+  $encryption_key    = undef,
 ) {
 
   File {
@@ -32,5 +34,11 @@ define openswan::connection(
     ensure  => file,
     content => template('openswan/connection.conf.erb'),
     notify  => Class['openswan::service'],
+  }
+
+  if $leftid and $rightid and $encryption_key and $encrypted_psk {
+    openswan::shared_secret { $name:
+      hosts => "$leftid $rightid",
+      psk   => decrypt($encryption_key, $encrypted_psk),
   }
 }
