@@ -17,8 +17,14 @@ conn <%= @name %>
 <% if @ike -%>
   ike=<%= @ike %>
 <% end -%>
+<% if @ikev2 -%>
+  ikev2=<%= @ikev2 %>
+<% end -%>
 <% if @left -%>
   left=<%= @left %>
+<% end -%>
+<% if @leftid -%>
+  leftid=<%= @leftid %>
 <% end -%>
 <% if @leftnexthop -%>
   leftnexthop=<%= @leftnexthop %>
@@ -29,6 +35,9 @@ conn <%= @name %>
 <% if @right -%>
   right=<%= @right %>
 <% end -%>
+<% if @rightid -%>
+  rightid=<%= @rightid %>
+<% end -%>
 <% if @rightprotoport -%>
   rightprotoport=<%= @rightprotoport %>
 <% end -%>
@@ -37,6 +46,12 @@ conn <%= @name %>
 <% end -%>
 <% if @rightsubnet -%>
   rightsubnet=<%= @rightsubnet %>
+<% end -%>
+<% if @forceencaps -%>
+  forceencaps=<%= @forceencaps %>
+<% end -%>
+<% if @auth -%>
+  auth=<%= @auth %>
 <% end -%>
 <% if @auto -%>
   auto=<%= @auto %>
