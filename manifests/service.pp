@@ -1,5 +1,5 @@
-class openswan::service {
-  service { $openswan::params::service_name:
+class strongswan::service {
+  service { $strongswan::params::service_name:
     ensure     => running,
     enable     => true,
     hasrestart => true,

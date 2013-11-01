@@ -1,4 +1,4 @@
-define openswan::shared_secret (
+define strongswan::shared_secret (
   $hosts,
   $psk
 ) {
@@ -13,6 +13,6 @@ define openswan::shared_secret (
     ensure  => file,
     mode    => '0600',
     content => "${hosts} : PSK \"${psk}\"\n",
-    notify  => Class['openswan::service'],
+    notify  => Class['strongswan::service'],
   }
 }

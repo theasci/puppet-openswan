@@ -1,4 +1,4 @@
-class openswan::params {
+class strongswan::params {
 
   # Logic for Debug Level. Default: undef will comment out debugging. Otherwise,
   # debug levels for OpenSWAN can be set here (string: space seperated)
@@ -21,11 +21,11 @@ class openswan::params {
 
   case $::operatingsystem {
     debian,ubuntu: {
-      $package_list = ['libgmp3c2', 'openswan', 'lsof']
+      $package_list = ['libgmp3c2', 'strongswan', 'lsof']
       $service_name = 'ipsec'
     }
     redhat,centos: {
-      $package_list = ['openswan']
+      $package_list = ['strongswan']
       $service_name = 'ipsec'
     }
     default: { fail('Unrecognized operating system') }

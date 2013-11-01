@@ -1,4 +1,4 @@
-class openswan::config(
+class strongswan::config(
  $debug_level = undef,
  $nat_t,
  $opportunistic_encryption,
@@ -15,12 +15,12 @@ class openswan::config(
 
   file { '/etc/ipsec.conf':
     ensure  => file,
-    content => template('openswan/ipsec.conf.erb'),
+    content => template('strongswan/ipsec.conf.erb'),
   }
   file { '/etc/ipsec.secrets':
     ensure => file,
     mode   => '0600',
-    source => 'puppet:///modules/openswan/ipsec.secrets',
+    source => 'puppet:///modules/strongswan/ipsec.secrets',
   }
   file { '/etc/ipsec.d':
     ensure => directory,

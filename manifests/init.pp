@@ -1,17 +1,17 @@
-class openswan (
-  $debug_level              = $openswan::params::debug_level,
-  $nat_t                    = $openswan::params::nat_t,
-  $opportunistic_encryption = $openswan::params::opportunistic_encryption,
-  $plutoopts                = $openswan::params::plutoopts,
-  $protostack               = $openswan::params::protostack,
-  $virtual_private          = $openswan::params::virtual_private
-) inherits openswan::params {
+class strongswan (
+  $debug_level              = $strongswan::params::debug_level,
+  $nat_t                    = $strongswan::params::nat_t,
+  $opportunistic_encryption = $strongswan::params::opportunistic_encryption,
+  $plutoopts                = $strongswan::params::plutoopts,
+  $protostack               = $strongswan::params::protostack,
+  $virtual_private          = $strongswan::params::virtual_private
+) inherits strongswan::params {
 
   include stdlib
 
-  anchor { 'openswan::begin': }
-  -> class { 'openswan::package': }
-  -> class { 'openswan::config':
+  anchor { 'strongswan::begin': }
+  -> class { 'strongswan::package': }
+  -> class { 'strongswan::config':
     debug_level              => $debug_level,
     nat_t                    => $nat_t,
     opportunistic_encryption => $opportunistic_encryption,
@@ -19,9 +19,9 @@ class openswan (
     plutoopts                => $plutoopts,
     virtual_private          => $virtual_private,
   }
-  ~> class { 'openswan::service': }
-  -> anchor { 'openswan::end': }
+  ~> class { 'strongswan::service': }
+  -> anchor { 'strongswan::end': }
 
-  $connections = hiera_hash('openswan::connections', {})
-  create_resources('openswan::connection', $connections)
+  $connections = hiera_hash('strongswan::connections', {})
+  create_resources('strongswan::connection', $connections)
 }
