@@ -1,10 +1,7 @@
 class strongswan::config(
- $debug_level = undef,
- $nat_t,
- $opportunistic_encryption,
- $plutoopts = undef,
- $protostack,
- $virtual_private
+  $charon_debug = undef,
+  $nat_t,
+  $virtual_private,
 ) {
 
   File {
@@ -13,28 +10,26 @@ class strongswan::config(
     mode  => '0644',
   }
 
-  file { '/etc/ipsec.conf':
+  $conf_basedir = $strongswan::params::conf_basedir
+  file { "${conf_basedir}/ipsec.conf":
     ensure  => file,
     content => template('strongswan/ipsec.conf.erb'),
   }
-  file { '/etc/ipsec.secrets':
+  file { "${conf_basedir}/ipsec.secrets":
     ensure => file,
     mode   => '0600',
-    source => 'puppet:///modules/strongswan/ipsec.secrets',
+    content => template('strongswan/ipsec.secrets.erb'),
   }
-  file { '/etc/ipsec.d':
+  file { "${conf_basedir}/ipsec.d":
     ensure => directory,
     mode   => '0755',
   }
-  file { '/etc/ipsec.d/connections':
+  file { "${conf_basedir}/ipsec.d/connections":
     ensure => directory,
     mode   => '0755',
   }
-  file { '/etc/ipsec.d/secrets':
+  file { "${conf_basedir}/ipsec.d/secrets":
     ensure => directory,
     mode   => '0600',
-  }
-  file { '/etc/ipsec.d/connections/index.conf':
-    ensure => file,
   }
 }

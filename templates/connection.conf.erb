@@ -2,9 +2,6 @@ conn <%= @name %>
 <% if @authby -%>
   authby=<%= @authby %>
 <% end -%>
-<% if @pfs -%>
-  pfs=<%= @pfs %>
-<% end -%>
 <% if @rekey -%>
   rekey=<%= @rekey %>
 <% end -%>
@@ -17,8 +14,11 @@ conn <%= @name %>
 <% if @ike -%>
   ike=<%= @ike %>
 <% end -%>
-<% if @ikev2 -%>
-  ikev2=<%= @ikev2 %>
+<% if @keyexchange -%>
+  keyexchange=<%= @keyexchange %>
+<% end -%>
+<% if @aggressive -%>
+  aggressive=<%= @aggressive %>
 <% end -%>
 <% if @left -%>
   left=<%= @left %>

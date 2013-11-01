@@ -1,32 +1,24 @@
 class strongswan::params {
-
-  # Logic for Debug Level. Default: undef will comment out debugging. Otherwise,
-  # debug levels for OpenSWAN can be set here (string: space seperated)
-  $debug_level = undef
-
-  # Extra parameters for Pluto
-  $plutoopts = undef
+  # Charon Debug Level. Default: undef will comment out debugging. Otherwise,
+  # debug levels for Charon can be set here (string: comma seperated)
+  $charon_debug = undef
 
   # Exclude networks used on server side by adding %v4:!a.b.c.0/24
-  $virtual_private = '%v4:10.0.0.0/8,%v4:192.168.0.0/16,%v4:172.16.0.0/12'
+  $virtual_private = undef
 
   # Enable NAT Transversal (NAT-T)
   $nat_t = true
 
-  # IPSec Protocol Stack. auto will try netkey, then klips then mast
-  $protostack = 'auto'
-
-  # Enable Opportunistic Encryption
-  $opportunistic_encryption = 'off'
-
   case $::operatingsystem {
     debian,ubuntu: {
-      $package_list = ['libgmp3c2', 'strongswan', 'lsof']
+      $package_list = ['strongswan']
       $service_name = 'ipsec'
+      $conf_basedir = '/etc'
     }
     redhat,centos: {
       $package_list = ['strongswan']
-      $service_name = 'ipsec'
+      $service_name = 'strongswan'
+      $conf_basedir = '/etc/strongswan'
     }
     default: { fail('Unrecognized operating system') }
   }

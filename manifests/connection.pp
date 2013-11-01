@@ -3,13 +3,13 @@ define strongswan::connection(
   $authby            = undef,
   $esp               = undef,
   $ike               = undef,
-  $ikev2             = undef,
+  $keyexchange       = undef,
+  $aggressive        = undef,
   $left              = undef,
   $leftid            = undef,
   $leftsubnet        = undef,
   $leftprotoport     = undef,
   $leftnexthop       = undef,
-  $pfs               = undef,
   $rekey             = undef,
   $right             = undef,
   $rightid           = undef,
@@ -30,7 +30,8 @@ define strongswan::connection(
     mode  => '0644',
   }
 
-  file { "/etc/ipsec.d/connections/${name}.conf":
+  $conf_basedir = $strongswan::params::conf_basedir
+  file { "${conf_basedir}/ipsec.d/connections/${name}.conf":
     ensure  => file,
     content => template('strongswan/connection.conf.erb'),
     notify  => Class['strongswan::service'],
@@ -38,7 +39,7 @@ define strongswan::connection(
 
   if $leftid and $rightid and $encryption_key and $encrypted_psk {
     strongswan::shared_secret { $name:
-      hosts => "$leftid $rightid",
+      hosts => "${leftid} ${rightid}",
       psk   => decrypt($encryption_key, $encrypted_psk),
     }
   }

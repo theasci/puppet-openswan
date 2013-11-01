@@ -1,19 +1,17 @@
 #
 # This file is managed by Puppet
 #
-# /etc/ipsec.conf - Openswan IPsec configuration file
-version 2.0
+# <%= @conf_basedir %>/ipsec.conf - Strongswan IPsec configuration file
 
 config setup
-<% if @debug_level -%>
-        plutodebug=<%= @debug_level.eql?('all') ? 'all' : "'#{@debug_level}'" %>
+<% if @charon_debug -%>
+        charondebug=<%= @debug_level %>
 <% end -%>
-<% if @plutoopts -%>
-        plutoopts="<%= @plutoopts %>"
-<% end -%>
+<% if @nat_t -%>
         nat_traversal=<%= @nat_t %>
+<% end -%>
+<% if @virtual_private -%>
         virtual_private=<%= @virtual_private %>
-        oe=<%= @opportunistic_encryption %>
-        protostack=<%= @protostack %>
+<% end -%>
 
-include /etc/ipsec.d/connections/*.conf
+include <%= @conf_basedir %>/ipsec.d/connections/*.conf
