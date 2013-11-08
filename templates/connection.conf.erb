@@ -15,8 +15,14 @@ conn <%= @name %>
 <% if @ike -%>
   ike=<%= @ike %>
 <% end -%>
+<% if @ikelifetime -%>
+  ikelifetime=<%= @ikelifetime %>
+<% end -%>
 <% if @keyexchange -%>
   keyexchange=<%= @keyexchange %>
+<% end -%>
+<% if @lifetime -%>
+  lifetime=<%= @lifetime %>
 <% end -%>
 <% if @aggressive -%>
   aggressive=<%= @aggressive %>
