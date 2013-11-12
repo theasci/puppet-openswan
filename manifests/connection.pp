@@ -22,8 +22,7 @@ define strongswan::connection(
   $auth              = undef,
   $type              = undef,
   $opts              = undef,
-  $encrypted_psk     = undef,
-  $encryption_key    = undef,
+  $psk               = undef,
 ) {
 
   File {
@@ -39,10 +38,10 @@ define strongswan::connection(
     notify  => Class['strongswan::service'],
   }
 
-  if $leftid and $rightid and $encryption_key and $encrypted_psk {
+  if $leftid and $rightid and $psk {
     strongswan::shared_secret { $name:
       hosts => "${leftid} ${rightid}",
-      psk   => decrypt($encryption_key, $encrypted_psk),
+      psk   => $psk,
     }
   }
 }
