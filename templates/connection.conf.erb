@@ -42,6 +42,9 @@ conn <%= @name %>
 <% if @leftsubnet -%>
   leftsubnet=<%= @leftsubnet %>
 <% end -%>
+<% if @leftsourceip -%>
+  leftsourceip=<%= @leftsourceip %>
+<% end -%>
 <% if @right -%>
   right=<%= @right %>
 <% end -%>
@@ -56,6 +59,9 @@ conn <%= @name %>
 <% end -%>
 <% if @rightsubnet -%>
   rightsubnet=<%= @rightsubnet %>
+<% end -%>
+<% if @rightsourceip -%>
+  rightsourceip=<%= @rightsourceip %>
 <% end -%>
 <% if @forceencaps -%>
   forceencaps=<%= @forceencaps %>
