@@ -14,6 +14,7 @@ define strongswan::connection(
   $leftsourceip      = undef,
   $lifetime          = undef,
   $rekey             = undef,
+  $rekeyfuzz         = undef,
   $right             = undef,
   $rightid           = undef,
   $rightprotoport    = undef,
